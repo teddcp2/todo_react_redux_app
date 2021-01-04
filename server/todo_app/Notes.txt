@@ -1,0 +1,43 @@
+
+
+flask-restful
+====================
+https://flask-restful.readthedocs.io/en/latest/quickstart.html
+
+
+api = Api()
+api.add_resource(...)
+api.init_app(app)
+
+https://stackoverflow.com/a/27988898/12210002
+
+
+
+flask Blueprint + Restful
+======================
+
+https://stackoverflow.com/q/32488098/12210002
+https://stackoverflow.com/q/38448618/12210002
+https://dev.to/paurakhsharma/flask-rest-api-part-2-better-structure-with-blueprint-and-flask-restful-2n93
+https://flask-restful.readthedocs.io/en/latest/intermediate-usage.html
+
+
+subdomain in blueprint - https://stackoverflow.com/a/7536714/12210002
+https://realpython.com/flask-blueprint/#:~:text=Each%20Flask%20Blueprint%20is%20an,before%20you%20can%20run%20it.
+https://hackersandslackers.com/flask-blueprints/
+
+
+flask restplus
+====================
+
+https://www.freecodecamp.org/news/structuring-a-flask-restplus-web-service-for-production-builds-c2ec676de563/
+https://nikgrozev.com/2018/10/12/python-api-with-flask-and-flask-restplus/
+
+
+
+application conext and g
+====================
+
+https://stackoverflow.com/q/15083967/12210002
+https://stackoverflow.com/a/20041823/12210002
+https://stackoverflow.com/a/30514815/12210002

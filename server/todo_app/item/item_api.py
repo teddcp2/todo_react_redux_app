@@ -1,5 +1,4 @@
-from datetime import date
-from flask_restful import Resource, reqparse, abort
+from flask_restful import Resource, reqparse
 
 from todo_app import db
 from todo_app.models.item_model import Item as item_db

@@ -22,8 +22,6 @@ def init_app():
         db.init_app(app)
         migrate.init_app(app, db)
 
-        from . import routes  # Importing routes
-
         from .models.item_model import Item
         from .models.bucket_model import Bucket
 
@@ -31,31 +29,36 @@ def init_app():
         db.create_all()
         db.session.commit()
 
-        # Importing Resources
-        from .resources.items.items_resources import ItemsAPI
-        from .resources.buckets.buckets_resources import BucketsAPI
-        from .resources.bucket.bucket_api import BucketAPI
-        from .resources.item.item_api import ItemAPI
-        # from .resources.item.item_delete_api import ItemDeleteAPI
-        # from .resources.item.item_update_api import ItemUpdateAPI
+        # Importing Blueprints
+        from .bucket import bucket_bp
+        from .buckets import buckets_bp
+        from .item import item_bp
+        from .items import items_bp
+
+        app.register_blueprint(bucket_bp, url_prefix="/bucket")
+        app.register_blueprint(buckets_bp, url_prefix="/buckets")
+        app.register_blueprint(item_bp, url_prefix="/task")
+        app.register_blueprint(items_bp, url_prefix="/tasks")
 
         # Adding the resources
-        api.add_resource(ItemsAPI, "/tasks", endpoint="items")
-        api.add_resource(BucketsAPI, "/buckets", endpoint="buckets")
+        # api.add_resource(ItemsAPI, "/tasks", endpoint="items")
+        # api.add_resource(BucketsAPI, "/buckets", endpoint="buckets")
 
-        api.add_resource(BucketAPI,
-                         "/bucket",
-                         "/bucket/<int:id>",
-                         endpoint="bucket")
+        # api.add_resource(BucketAPI,
+        #                  "/bucket",
+        #                  "/bucket/<int:id>",
+        #                  endpoint="bucket")
 
-        api.add_resource(ItemAPI, "/task",
-                                  "/task/<int:id>/update",
-                         "/task/<int:id>/delete", endpoint="task")
+        # api.add_resource(ItemAPI, "/task",
+        #                           "/task/<int:id>/update",
+        #                  "/task/<int:id>/delete", endpoint="task")
         # api.add_resource(ItemCreateAPI, "/task/<int:id>/update",
         #                  endpoint="task-update")
         # api.add_resource(ItemCreateAPI, "/task/<int:id>/delete",
         #                  endpoint="task-delete")
 
         api.init_app(app)
+
+        # print(app.url_map)
 
         return app
