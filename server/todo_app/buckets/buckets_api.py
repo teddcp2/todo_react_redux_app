@@ -20,8 +20,9 @@ resource_fields = buckets_api.model("Buckets_Resource_Model", {
 class BucketsAPI(Resource):
 
     # Get all the Buckets / Categories
-    @buckets_api.response(200, "Success")
+    @buckets_api.response(200, "SUCCESS")
     @buckets_api.marshal_with(resource_fields, envelope='buckets')
+    @buckets_api.expect(resource_fields)
     def get(self):
         buckets = bucket_db.query.all()
         return buckets, 200

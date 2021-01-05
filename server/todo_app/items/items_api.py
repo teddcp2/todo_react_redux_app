@@ -18,7 +18,7 @@ resource_fields = items_api.model("Items_Resource_Model", {
 })
 
 
-@items_api.route("/", endpoint="items", doc={'description': "Get all the available tasks sorted by created-date in descending order. You can get the recent 3 tasks by sending a payload."})
+@items_api.route("/", endpoint="items")
 class ItemsAPI(Resource):
 
     parser = reqparse.RequestParser()
@@ -26,8 +26,6 @@ class ItemsAPI(Resource):
 
     # Get all the items OR recetly added top 3 items
     @items_api.marshal_with(resource_fields, envelope='tasks')
-    @items_api.response(200, "Success")
-    @items_api.expect(parser)
     def get(self):
         items = []
         args = ItemsAPI.parser.parse_args()
