@@ -1,24 +1,33 @@
-
-from flask_restful import Resource, reqparse, marshal_with, fields
+from flask import Blueprint
+from flask_restx import Api, Resource, reqparse, fields
 from todo_app.models.item_model import Item as item_db
 
-resource_fields = {
+items_bp = Blueprint("Items", __name__)
+items_api = Api(items_bp)
+
+# buckets_api.add_resource(BucketsAPI, "", endpoint="buckets")
+# items_api.add_resource(ItemsAPI, "", endpoint="tasks")
+
+resource_fields = items_api.model("Items_Resource_Model", {
     "id": fields.Integer,
     "name": fields.String,
     "category": fields.Integer,
     "created_date": fields.DateTime,
     "mark_complete": fields.String,
     "deleted": fields.String
-}
+})
 
 
+@items_api.route("/", endpoint="items", doc={'description': "Get all the available tasks sorted by created-date in descending order. You can get the recent 3 tasks by sending a payload."})
 class ItemsAPI(Resource):
 
     parser = reqparse.RequestParser()
     parser.add_argument("recent", type=bool, help="Optional Param")
 
     # Get all the items OR recetly added top 3 items
-    @marshal_with(resource_fields)
+    @items_api.marshal_with(resource_fields, envelope='tasks')
+    @items_api.response(200, "Success")
+    @items_api.expect(parser)
     def get(self):
         items = []
         args = ItemsAPI.parser.parse_args()
