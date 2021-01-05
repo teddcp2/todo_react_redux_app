@@ -4,8 +4,7 @@ from flask_migrate import Migrate
 from flask_restx import Api
 
 
-api = Api(doc="/swaggerview", version="1.0", title="TODO APP APIS",
-          decription="My Todo app api")
+api = Api()
 db = SQLAlchemy()
 migrate = Migrate()
 
@@ -30,11 +29,11 @@ def init_app():
         # Importing Blueprints
         from .item import item_bp
         from .bucket import bucket_bp
-        from .items.items_api import items_bp
-        from .buckets.buckets_api import buckets_bp
+        from .items import items_bp
+        from .buckets import buckets_bp
 
         app.register_blueprint(bucket_bp, url_prefix="/bucket")
-        app.register_blueprint(buckets_bp)
+        app.register_blueprint(buckets_bp, url_prefix='/buckets')
         app.register_blueprint(item_bp, url_prefix="/task")
         app.register_blueprint(items_bp, url_prefix="/tasks")
 
