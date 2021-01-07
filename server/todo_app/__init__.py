@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_restx import Api
-
+from flask_restful import Api
+from flask_cors import CORS
 
 api = Api()
 db = SQLAlchemy()
@@ -13,6 +13,8 @@ def init_app():
     """core application."""
     app = Flask(__name__)
     app.config.from_object("config.Config")
+
+    # CORS(app, resources={r'/*': {'origins': '*'}})
 
     with app.app_context():
 
@@ -55,7 +57,11 @@ def init_app():
         #                  endpoint="task-delete")
 
         api.init_app(app)
+        CORS(app, resources={r"/*": {"origins": "*"}},
+             supports_credentials=True)
 
-        print(app.url_map)
+        # print(app.url_map)
+
+        # resources={r"/api/*": {"origins": "*"}}
 
         return app

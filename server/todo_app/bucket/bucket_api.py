@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 
+
 from todo_app import db
 from todo_app.models.bucket_model import Bucket as bucket_db
 
@@ -23,7 +24,9 @@ class BucketAPI(Resource):
             # print(new_bucket, name)
             db.session.add(new_bucket)
             db.session.commit()
-            return {"status": "success"}, 201
+
+            created_bucket_id = bucket_db.query.filter_by(name=name).first().id
+            return {"status": "success", "id": created_bucket_id}, 201
 
         return {"status": "failure"}, 400
 

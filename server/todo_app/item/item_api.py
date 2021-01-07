@@ -41,7 +41,9 @@ class ItemAPI(Resource):
             new_item = item_db(name=name, category=category)
             db.session.add(new_item)
             db.session.commit()
-            return {"status": "success"}, 201
+
+            created_item_id = item_db.query.filter_by(name=name).first().id
+            return {"status": "success", "id": created_item_id}, 201
 
         return {"status": "failure"}, 400
 

@@ -17,6 +17,7 @@ class Config:
     FLASK_ENV = os.environ.get('FLASK_ENV')
     DEBUG = os.environ.get("DEBUG")
     CSRF_ENABLED = True
+    CORS_HEADERS = 'Content-Type'
 
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URI")
