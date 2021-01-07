@@ -31,7 +31,7 @@ class ItemsAPI(Resource):
         else:
             # Return the recent 3 items sorted by created_date
             items = item_db.query.order_by(
-                item_db.created_date.desc()).limit(3).all()
+                item_db.id.desc()).limit(3).all()
 
         for item in items:
             # print(item, item.bucket, item.bucket.name)

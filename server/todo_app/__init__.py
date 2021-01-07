@@ -11,7 +11,8 @@ migrate = Migrate()
 
 def init_app():
     """core application."""
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder="./client/static",
+                template_folder="./client")
     app.config.from_object("config.Config")
 
     # CORS(app, resources={r'/*': {'origins': '*'}})
@@ -33,35 +34,20 @@ def init_app():
         from .bucket import bucket_bp
         from .items import items_bp
         from .buckets import buckets_bp
+        from .rootapp import root_app_bp
 
+        app.register_blueprint(root_app_bp)
         app.register_blueprint(bucket_bp, url_prefix="/bucket")
         app.register_blueprint(buckets_bp, url_prefix='/buckets')
         app.register_blueprint(item_bp, url_prefix="/task")
         app.register_blueprint(items_bp, url_prefix="/tasks")
 
-        # Adding the resources
-        # api.add_resource(ItemsAPI, "/tasks", endpoint="items")
-        # api.add_resource(BucketsAPI, "/buckets", endpoint="buckets")
-
-        # api.add_resource(BucketAPI,
-        #                  "/bucket",
-        #                  "/bucket/<int:id>",
-        #                  endpoint="bucket")
-
-        # api.add_resource(ItemAPI, "/task",
-        #                           "/task/<int:id>/update",
-        #                  "/task/<int:id>/delete", endpoint="task")
-        # api.add_resource(ItemCreateAPI, "/task/<int:id>/update",
-        #                  endpoint="task-update")
-        # api.add_resource(ItemCreateAPI, "/task/<int:id>/delete",
-        #                  endpoint="task-delete")
-
         api.init_app(app)
+
         CORS(app, resources={r"/*": {"origins": "*"}},
              supports_credentials=True)
 
-        # print(app.url_map)
-
+        print(app.url_map)
         # resources={r"/api/*": {"origins": "*"}}
 
         return app
