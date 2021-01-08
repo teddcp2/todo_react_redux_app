@@ -1,0 +1,15 @@
+@media (max-width: 770px) {
+  .search-box {
+    width: 100% !important;
+  }
+}
+
+@media (min-width: 770px) {
+  .search-box {
+    width: 50% !important;
+  }
+}
+
+input[type="search"]:disabled {
+  cursor: not-allowed;
+}

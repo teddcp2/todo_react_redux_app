@@ -1,0 +1,15 @@
+@media (min-width: 624px) {
+  .inputField {
+    width: 80vh !important;
+  }
+}
+
+@media (max-width: 624px) {
+  .inputField {
+    width: 100%;
+  }
+}
+
+.invalid {
+  border: 2px solid red !important;
+}
