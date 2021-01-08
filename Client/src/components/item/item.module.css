@@ -1,0 +1,13 @@
+.deleted {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mycard:hover {
+  box-shadow: 0 0 11px rgba(33, 33, 33, 0.2);
+  cursor: pointer;
+}
+
+.deleted.mycard:hover {
+  cursor: not-allowed;
+}

@@ -1,0 +1,17 @@
+.App {
+  font-family: "Lato", sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  /* border-bottom: 1px solid whitesmoke; */
+  text-decoration: none !important;
+  opacity: 0.6;
+}
+
+input:disabled {
+  cursor: not-allowed !important;
+}
