@@ -47,12 +47,14 @@ const CollectionItems = (props) => {
       return nm.toLowerCase().includes(searchValue.toLowerCase());
     });
   }
+  // console.log("PArent--", editingStatus)
   return (
     // <div className="row row-cols-1 row-cols-md-3">
     <div className="card-columns my-3">
       {filteredItems.map((item, idx) => (
         <Item
           key={idx}
+          index={idx}
           {...item}
           editingItem={editingStatus}
           handleChange={handleEditing}

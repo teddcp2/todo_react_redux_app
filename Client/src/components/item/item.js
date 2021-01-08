@@ -12,6 +12,7 @@ const Item = ({
   created_date,
   name,
   id,
+  index,
   editingItem,
   handleChange
 }) => {
@@ -20,6 +21,7 @@ const Item = ({
   let [value, setValue] = useState(name);
 
   const handleTextChange = (e) => setValue(e.target.value);
+
   const handleSubmit = () => {
     dispatch(editItem(id, value));
     handleChange(null);
@@ -34,6 +36,7 @@ const Item = ({
   // console.log(editingItem);
 
   if (editingItem.itemId === id && editingItem.editing) {
+    // console.log("To edit--", editingItem, value);
     titleContent = (
       <Fragment>
         <InputField
