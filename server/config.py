@@ -22,5 +22,6 @@ class Config:
     # Database
     SQLALCHEMY_DATABASE_URI = os.environ.get(
         'DATABASE_URL', 'sqlite:///data.db')  # os.environ.get("DATABASE_URI")
+    print(SQLALCHEMY_DATABASE_URI)
     SQLALCHEMY_ECHO = False
     SQLALCHEMY_TRACK_MODIFICATIONS = False
